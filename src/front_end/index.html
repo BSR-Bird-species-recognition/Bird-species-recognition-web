@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    
+</head>
+<>
+    <div class="overlay" id="overlay">
+        <h3>Updating now...</h3>
+        <h3>your result is:  </h3>
+        
+    </div>
+    <div class="hero-bg">
+        <section class="top">
+            <header>
+                <a href="#">SearchingBirds</a>
+                <!--<div class="weather" id="he-plugin-standard" ></div>-->
+            </header>
+
+            <h1><span>The Birds </span> You Want To Find</h1>
+
+            <p> Hail to thee, blithe Spirit!<br />
+                Bird thou never wert,<br />
+                That from Heaven, or near it,<br />
+                Pourest thy full heart</br>
+                In profuse strains of unpremeditated art.<br />
+                Higher still and higher<br />
+                From the earth thou springest<br />
+                Like a cloud of fire;<br />
+                The blue deep thou wingest,<br />
+                And singing still dost soar, and soaring ever singest …  -- William Shakespeare<br />
+            </p>
+            
+            <div class="form-container">
+                <form action="" enctype="multipart/form-data">
+                    <div class="form-left">
+                        <label for="bords">Update your Photo:</label>
+                        <input id="img" type="file"  accept=".jpg, .jpeg, .png" name="file" onchange="getImg(event);"> 
+                        <img id="showImg" src="" />
+                    </div>
+                    <a href="javascript:void(0);" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                        <input type="button" value="Update Your Photo" class="clickhere" /> 
+                    </a>
+                    <div id="light" class="white_content">
+                        <div id="font_login">THE RESULT</div>                           
+                        <form action="" method="post" id="form_submit">
+                            <!--informations: it is a very beautiful birds</br>-->
+                                
+                            </br>
+                            <input type="button" value="确认" class="button_beautiful" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" />
+                        </form>
+                    </div>
+                    <div id="fade" class="black_overlay"></div>
+                </form>
+            </div>
+        </section>
+        <section>
+
+        </section>
+    </div>
+
+    <section class="authentic">
+        <div class="right-col">
+            <h2>Find Them. Protect Them.</h2>
+            
+            <p >Fly Up High<br />
+                In The Sky<br />
+                Spread Your Wings<br />
+                And Do Your Things<br />
+                Fly Like A Bird<br />
+                Or Like A Herd<br />
+                Wanna Fly Away From Here<br />
+                So I Could Just Be Heard</p>
+        </div>
+        <img src="images/birds1.jpg" alt="Picture of food in a bowl">
+    </section>
+</body>
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js" ></script>
+<script>
+    var access_token = "24.48d56a455b50a47d2d9c488ad3ffdc6b.2592000.1609058213.282335-23054511";
+    // 监听图片选择事件
+    function getImg (event) {
+        var imageBase = "";
+        var reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = function (e) {
+            imageBase = e.target.result.replace("data:image/png;base64,","");
+            $("#showImg").prop("src", "data:image/png;base64," + imageBase);
+            $.ajax({
+                header: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                type: "post",
+                url: "https://aip.baidubce.com/rest/2.0/ocr/v1/idcard",
+                async: true,
+                data: {
+                    access_token: access_token,
+                    id_card_side: "front",
+                    image: imageBase
+                },
+                dataType: "jsonp",
+                timeout: 30000,
+                success: function (data) {
+                    console.log("解析成功");
+                    console.log(data);
+                },
+                error: function (xhr) {
+                    console.log("请求解析失败");
+                }
+            });
+        }
+    }
+</script>
+</html>
