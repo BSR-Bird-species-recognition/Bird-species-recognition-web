@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <title>Document</title>
+    <link href="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
     
 </head>
-<>
-    <div class="overlay" id="overlay">
-        <h3>Updating now...</h3>
-        <h3>your result is:  </h3>
-        
-    </div>
+<body>
+
     <div class="hero-bg">
         <section class="top">
             <header>
@@ -38,11 +36,39 @@
             <div class="form-container">
                 <form action="" enctype="multipart/form-data">
                     <div class="form-left">
-                        <label for="bords">Update your Photo:</label>
-                        <input id="img" type="file"  accept=".jpg, .jpeg, .png" name="file" onchange="getImg(event);"> 
-                        <img id="showImg" src="" />
+                        <div class="col-sm-12" text-center">
+                            <label for="input" class="btn btn-danger">
+                            <span>Choose your Photo</span>
+                            <input id="input" type="file" class="sr-only" onchange="getImg(event);"> 
+                            </label>
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <img id="showImg" src="" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <div>
+                                    <p>
+                                        Preview(100*100)：
+                                    </p>
+                                    <div class="img-preview">
+                                    </div>
+                                </div>
+                                <input type="button" value="Crop Picture" class="btn btn-primary" onclick="crop()"></input>
+                                <div>
+                                    <br/>
+                                    <p>
+                                        Result：
+                                    </p>
+                                    <img src="" alt="裁剪结果" id="result">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <a href="javascript:void(0);" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+                    <!--<a href="javascript:void(0);" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">-->
+                        <a onclick="getSceen()">
                         <input type="button" value="Update Your Photo" class="clickhere" /> 
                     </a>
                     <div id="light" class="white_content">
@@ -80,39 +106,10 @@
     </section>
 </body>
 <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js" ></script>
-<script>
-    var access_token = "24.48d56a455b50a47d2d9c488ad3ffdc6b.2592000.1609058213.282335-23054511";
-    // 监听图片选择事件
-    function getImg (event) {
-        var imageBase = "";
-        var reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
-        reader.onload = function (e) {
-            imageBase = e.target.result.replace("data:image/png;base64,","");
-            $("#showImg").prop("src", "data:image/png;base64," + imageBase);
-            $.ajax({
-                header: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                type: "post",
-                url: "https://aip.baidubce.com/rest/2.0/ocr/v1/idcard",
-                async: true,
-                data: {
-                    access_token: access_token,
-                    id_card_side: "front",
-                    image: imageBase
-                },
-                dataType: "jsonp",
-                timeout: 30000,
-                success: function (data) {
-                    console.log("解析成功");
-                    console.log(data);
-                },
-                error: function (xhr) {
-                    console.log("请求解析失败");
-                }
-            });
-        }
-    }
-</script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/cropper/3.1.3/cropper.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/updata.js"></script>
+<script type="text/javascript" src="js/Click.js"></script>
+<script type="text/javascript" src="js/change.js"></script>
 </html>

@@ -331,3 +331,22 @@ p {
     margin-top: 50px;
     margin-left: 20px;
 }
+
+.row{
+    margin-bottom: 5px;
+}
+#photo {
+    max-width: 100%;
+}
+.img-preview {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+}
+button {
+    margin-top:10px;
+}
+#result {
+    width: 150px;
+    height: 150px;
+}
