@@ -19,11 +19,12 @@ var access_token = "24.48d56a455b50a47d2d9c488ad3ffdc6b.2592000.1609058213.28233
                     id_card_side: "front",
                     image: imageBase
                 },
-                dataType: "jsonp",
+                dataType: "json",
                 timeout: 30000,
                 success: function (data) {
                     console.log("解析成功");
                     console.log(data);
+                    alert(JSON.stringify(data,null,' '));
                 },
                 error: function (xhr) {
                     console.log("请求解析失败");

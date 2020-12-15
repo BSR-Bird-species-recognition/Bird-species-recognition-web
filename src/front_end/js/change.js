@@ -46,6 +46,9 @@ var crop = function(){
     }).toBlob(function(blob){
         // 裁剪后将图片放到指定标签
         $target.attr('src', URL.createObjectURL(blob));
+
+        
+
     });
 }
 $(function(){
