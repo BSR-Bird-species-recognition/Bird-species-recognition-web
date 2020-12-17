@@ -45,9 +45,62 @@ var crop = function(){
         height:300
     }).toBlob(function(blob){
         // 裁剪后将图片放到指定标签
-        $target.attr('src', URL.createObjectURL(blob));
+        var objectUrl = URL.createObjectURL(blob)
+        $target.attr('src', objectUrl);
 
+        var imageBase = "";
+        var reader = new FileReader;
+        reader.readAsDataURL(blob);
+        reader.onload = function (e) {
+            imageBase = e.target.result.replace("data:image/png;base64,","");
+            //$("#showImg").prop("src", "data:image/png;base64," + imageBase);
+        $.ajax({
+                header: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                type: "post",
+                url: "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
+                async: true,
+                data: {
+                    access_token: "24.b2979c97b78b6a3c109c6833daf531c5.2592000.1610779389.282335-23169453",
+                    image: imageBase
+                },
+                dataType: "json",
+                timeout: 30000,
+                success: function (data) {
+                    console.log("解析成功");
+                    console.log(data);
+                    alert(JSON.stringify(data,null,' '));
+                },
+                error: function (xhr) {
+                    console.log("请求解析失败");
+                }
+            });
+        }
         
+
+        /*$.ajax({
+            header: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            type: "post",
+            url: "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
+            async: true,
+            data: {
+                access_token: "24.b2979c97b78b6a3c109c6833daf531c5.2592000.1610779389.282335-23169453",
+                url:  objectUrl
+            },
+            dataType: "json",
+            timeout: 30000,
+            success: function (data) {
+                console.log("解析成功");
+                console.log(data);
+                alert(JSON.stringify(data,null,' '));
+            },
+            error: function (xhr) {
+                console.log("请求解析失败");
+            }
+        });*/
 
     });
 }
