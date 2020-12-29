@@ -34,7 +34,5 @@ def index(request): # 此处request只是形参，可以更改为任意名称，
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index),
-    # path('login/', login),
     path('upload/', views.upload),
-    # path('testonly/', testonly)
 ]
