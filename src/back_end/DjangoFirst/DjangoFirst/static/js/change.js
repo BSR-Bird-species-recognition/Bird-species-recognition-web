@@ -59,7 +59,7 @@ var crop = function(){
                     "Content-Type": "application/x-www-form-urlencoded"
                 },
                 type: "post",
-                url: "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
+                url: "../upload/",
                 async: true,
                 data: {
                     access_token: "24.b2979c97b78b6a3c109c6833daf531c5.2592000.1610779389.282335-23169453",
@@ -77,7 +77,7 @@ var crop = function(){
                 }
             });
         }
-        
+
 
         /*$.ajax({
             header: {
