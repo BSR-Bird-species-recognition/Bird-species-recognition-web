@@ -6,33 +6,30 @@ from django.http import HttpResponse
 
 # 待完善
 def analysisPic(File):
+
     return 'This is an albatross!'
 
 # 待完善
 def searchInDatabase(anaResult):
+
     return '很好看的鸟'
 
 def upload(request):
     # 请求方法为post时，进行处理
+    print("收到请求")
     if request.method == 'POST':
-        # 获取上传的文件，如果没有文件，则默认为none
-        # 注意！此处的birdPic必须与表单中提交的文件名称一致
-        # File = request.FILES.get('file', None)
         File = request.body
-
-        #File
         if File is None:
             return HttpResponse("没有上传文件")
         else:
-            print('拿到文件啦')
+            print('取得图片')
             # 将文件传入处理函数，得到结果
             anaResult = analysisPic(File)
 
             # 以下为用于返回的json数据体
             data = {
-                'name': anaResult,
-                'descripiton': searchInDatabase(anaResult),
-                # 'picture':
+                'name':anaResult,
+                'descripiton':searchInDatabase(anaResult)
             }
             # 返回json
             content = json.dumps(data)
