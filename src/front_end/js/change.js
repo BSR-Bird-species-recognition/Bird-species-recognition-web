@@ -68,39 +68,19 @@ var crop = function(){
                 dataType: "json",
                 timeout: 30000,
                 success: function (data) {
+                    // Get and display the result
+                    //$('.loader').hide();
+                    $('#response').fadeIn(600);
+                    $('#response').text(' Result:  ' + JSON.stringify(data));
                     console.log("解析成功");
-                    console.log(data);
-                    alert(JSON.stringify(data,null,' '));
+                    /*console.log(data);
+                    alert(JSON.stringify(data,null,' '));*/
                 },
                 error: function (xhr) {
                     console.log("请求解析失败");
                 }
             });
         }
-        
-
-        /*$.ajax({
-            header: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            type: "post",
-            url: "https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic",
-            async: true,
-            data: {
-                access_token: "24.b2979c97b78b6a3c109c6833daf531c5.2592000.1610779389.282335-23169453",
-                url:  objectUrl
-            },
-            dataType: "json",
-            timeout: 30000,
-            success: function (data) {
-                console.log("解析成功");
-                console.log(data);
-                alert(JSON.stringify(data,null,' '));
-            },
-            error: function (xhr) {
-                console.log("请求解析失败");
-            }
-        });*/
 
     });
 }
