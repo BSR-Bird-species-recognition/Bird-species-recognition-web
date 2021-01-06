@@ -1,0 +1,20 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">百鸟汇</view>
+</cu-custom>
+<view class='margin-xl bg-white padding-xl radius shadow-lg'>
+  <image src="{{tempFilePaths }}"binderror = 'errorFunction' data-errorimg="{{index}}" catchTap="chooseImageTap" mode="aspectFit" style="width: 100%; height: 450rpx" />
+  <view class='text-center margin-bottom text-lg  text-grey'></view>
+  <view class='text-content' wx:if="{{text!=''}}">
+    <view class='margin-top-sm'>
+      <view class="cu-tag bg-red">{{categoryName}}</view>
+    </view>
+    <view style = "font-size:20px;font-weight:bold "class='margin-top-sm'>{{name}}</view>
+    <view class='margin-top-sm'>{{description}}</view>
+  </view>
+  <view class='text-content' wx:else>
+    <view class='margin-top-sm'>请上传需要识别的鸟类图片</view>
+  </view>
+  <view class="margin-tb-sm text-center">
+  <button class="cu-btn round bg-blue" role="button" aria-disabled="false" bindtap="chooseimage">上传图片</button>
+</view>
+</view>
